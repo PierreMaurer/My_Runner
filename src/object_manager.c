@@ -6,7 +6,3 @@
 */
 
 #include "../includes/struct.h"
-
-struct game_object *create_object(const char *path_to_spritesheet ,
-                                  sfVector2f pos , sfIntRect rect){
-}

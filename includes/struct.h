@@ -11,7 +11,7 @@
 #include <SFML/Graphics.h>
 #include <SFML/Audio.h>
 #include <stdio.h>
-#include "stdlib.h"
+#include <stdlib.h>
 
 enum e_type {
     CHARACTER,
@@ -26,6 +26,19 @@ typedef struct {
     sfVector2f position;
     sfIntRect rect;
 } game_object_t;
+
+typedef struct game {
+    struct sprite_game *game_sprite;
+    struct general *general;
+} game_t;
+
+typedef struct general {
+    sfRenderWindow *window;
+} general_t;
+
+typedef struct sprite_game {
+    sfSprite *background;
+} sprite_t;
 
 void event_manager_menu(sfRenderWindow *window, sfEvent event);
 #endif //STRUCT_H
