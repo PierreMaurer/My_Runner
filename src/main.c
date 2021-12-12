@@ -43,6 +43,8 @@ int main(void)
     struct game *game = init_game();
     while (sfRenderWindow_isOpen(game->general->window)) {
         sfEvent event;
+        while (sfRenderWindow_pollEvent(game->general->window, &event))
+            event_manager_menu(game->general->window, event);
         sfRenderWindow_clear(game->general->window, sfBlack);
         sfRenderWindow_drawSprite(game->general->window, game->game_sprite->background, NULL);
         sfRenderWindow_display(game->general->window);

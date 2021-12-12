@@ -13,7 +13,7 @@ OBJ =    $(SRC:.c=.o)
 LIB = -lcsfml-graphics -lcsfml-window -lcsfml-system
 INCLUDE = -I ../include/ -L ./lib/ -lmy -g
 
-NAME =	wind
+NAME =	my_runner
 
 all:	$(NAME)
 
