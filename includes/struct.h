@@ -13,20 +13,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-enum e_type {
-    CHARACTER,
-    BACKGROUD,
-    GROUND,
-};
-
-typedef struct {
-    enum e_type object_type;
-    sfSprite *sprite_element;
-    sfTexture *texure_element;
-    sfVector2f position;
-    sfIntRect rect;
-} game_object_t;
-
 typedef struct game {
     struct sprite_game *game_sprite;
     struct general *general;
@@ -34,10 +20,27 @@ typedef struct game {
 
 typedef struct general {
     sfRenderWindow *window;
+    sfClock *clock;
+    sfEvent event;
 } general_t;
 
-typedef struct sprite_game {
+typedef struct rect_sprite {
+    sfIntRect bg_rect;
+    sfIntRect building_rect;
+    sfIntRect far_rect;
+    sfIntRect skill_rect;
+    sfIntRect road_rect;
+} rect_t;
+
+typedef struct sprite_game
+{
+    struct rect_sprite *rect_game;
     sfSprite *background;
+    sfSprite *building_bg;
+    sfSprite *far_building_bg;
+    sfSprite *skill_building_bg;
+    sfSprite *road;
+
 } sprite_t;
 
 void event_manager_menu(sfRenderWindow *window, sfEvent event);

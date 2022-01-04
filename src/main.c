@@ -7,23 +7,87 @@
 
 #include "../includes/struct.h"
 
+
+//TODO Opti rect_init
+struct rect_sprite *rect_init(void)
+{
+    struct rect_sprite *rect_game = malloc(sizeof(rect_t));
+    rect_game->bg_rect.height = 1080;
+    rect_game->bg_rect.left = 0;
+    rect_game->bg_rect.width = 1920;
+    rect_game->bg_rect.top = 0;
+    rect_game->building_rect.height = 1080;
+    rect_game->building_rect.left = 0;
+    rect_game->building_rect.width = 1920;
+    rect_game->building_rect.top = 0;
+    rect_game->far_rect.height = 1080;
+    rect_game->far_rect.left = 0;
+    rect_game->far_rect.width = 1920;
+    rect_game->far_rect.top = 0;
+    rect_game->skill_rect.height = 1080;
+    rect_game->skill_rect.left = 0;
+    rect_game->skill_rect.width = 1920;
+    rect_game->skill_rect.top = 0;
+    rect_game->road_rect.height = 1080;
+    rect_game->road_rect.left = 0;
+    rect_game->road_rect.width = 1920;
+    rect_game->road_rect.top = 0;
+    return rect_game;
+}
+
 struct sprite_game *sprite_init()
 {
     sprite_t *sprite_game = malloc(sizeof(sprite_t));
-
+    sprite_game->rect_game = rect_init();
     sprite_game->background = sfSprite_create();
-    sfTexture *texture = sfTexture_createFromFile("ressources/background.png", NULL);
+    sfTexture *texture = sfTexture_createFromFile("ressources/sky.png", NULL);
+    sfTexture_setRepeated(texture, sfTrue);
+    sfSprite_setTextureRect(sprite_game->background, sprite_game->rect_game->bg_rect);
     sfSprite_setTexture(sprite_game->background, texture, sfTrue);
 
+    sprite_game->building_bg = sfSprite_create();
+    sfTexture *texture_2 = sfTexture_createFromFile("ressources/buildings.png", NULL);
+    sfTexture_setRepeated(texture_2, sfTrue);
+    sfSprite_setTextureRect(sprite_game->building_bg, sprite_game->rect_game->building_rect);
+    sfSprite_setTexture(sprite_game->building_bg, texture_2, sfTrue);
+
+    sprite_game->far_building_bg = sfSprite_create();
+    sfTexture *texture_3 = sfTexture_createFromFile("ressources/wall2.png", NULL);
+    sfTexture_setRepeated(texture_3, sfTrue);
+    sfSprite_setTextureRect(sprite_game->far_building_bg, sprite_game->rect_game->far_rect);
+    sfSprite_setTexture(sprite_game->far_building_bg, texture_3, sfTrue);
+
+    sprite_game->skill_building_bg = sfSprite_create();
+    sfTexture *texture_4 = sfTexture_createFromFile("ressources/wall1.png", NULL);
+    sfTexture_setRepeated(texture_4, sfTrue);
+    sfSprite_setTextureRect(sprite_game->skill_building_bg, sprite_game->rect_game->skill_rect);
+    sfSprite_setTexture(sprite_game->skill_building_bg, texture_4, sfTrue);
+
+    sprite_game->road = sfSprite_create();
+    sfTexture *texture_5 = sfTexture_createFromFile("ressources/road.png", NULL);
+    sfTexture_setRepeated(texture_5, sfTrue);
+    sfSprite_setTextureRect(sprite_game->road, sprite_game->rect_game->road_rect);
+    sfSprite_setTexture(sprite_game->road, texture_5, sfTrue);
     return sprite_game;
 };
 
+void display_sprite(game_t game)
+{
+    sfRenderWindow_clear(game.general->window, sfBlack);
+    sfRenderWindow_drawSprite(game.general->window, game.game_sprite->background, NULL);
+    sfRenderWindow_drawSprite(game.general->window, game.game_sprite->building_bg, NULL);
+    sfRenderWindow_drawSprite(game.general->window, game.game_sprite->far_building_bg, NULL);
+    sfRenderWindow_drawSprite(game.general->window, game.game_sprite->skill_building_bg, NULL);
+    sfRenderWindow_drawSprite(game.general->window, game.game_sprite->road, NULL);
+    sfRenderWindow_display(game.general->window);
+}
 struct general *init_general(void)
 {
     struct general *general = malloc(sizeof(general));
     sfVideoMode mode_video = {1920, 1080, 32};
     general->window = sfRenderWindow_create(mode_video, "MyRunner"
             , sfDefaultStyle, NULL);
+    general->clock = sfClock_create();
     return general;
 
 }
@@ -38,16 +102,36 @@ struct game *init_game()
     return game;
 }
 
+void position_set (game_t *game)
+{
+    sfSprite_setTextureRect(game->game_sprite->background, game->game_sprite->rect_game->bg_rect);
+    sfSprite_setTextureRect(game->game_sprite->building_bg, game->game_sprite->rect_game->building_rect);
+    sfSprite_setTextureRect(game->game_sprite->far_building_bg, game->game_sprite->rect_game->far_rect);
+    sfSprite_setTextureRect(game->game_sprite->skill_building_bg, game->game_sprite->rect_game->skill_rect);
+    sfSprite_setTextureRect(game->game_sprite->road, game->game_sprite->rect_game->road_rect);
+}
+
+void move_parallax(game_t *game)
+{
+    game->game_sprite->rect_game->bg_rect.left += 4;
+    game->game_sprite->rect_game->building_rect.left += 8;
+    game->game_sprite->rect_game->far_rect.left += 12;
+    game->game_sprite->rect_game->skill_rect.left += 16;
+    game->game_sprite->rect_game->road_rect.left += 20;
+}
+
 int main(void)
 {
     struct game *game = init_game();
     while (sfRenderWindow_isOpen(game->general->window)) {
-        sfEvent event;
-        while (sfRenderWindow_pollEvent(game->general->window, &event))
-            event_manager_menu(game->general->window, event);
-        sfRenderWindow_clear(game->general->window, sfBlack);
-        sfRenderWindow_drawSprite(game->general->window, game->game_sprite->background, NULL);
-        sfRenderWindow_display(game->general->window);
+        while (sfRenderWindow_pollEvent(game->general->window, &game->general->event))
+            event_manager_menu(game->general->window, game->general->event);
+        if (sfTime_asSeconds(sfClock_getElapsedTime(game->general->clock)) > 0.03) {
+            move_parallax(game);
+            position_set(game);
+            sfClock_restart(game->general->clock);
+        }
+        display_sprite(*game);
     }
     return 0;
 }
