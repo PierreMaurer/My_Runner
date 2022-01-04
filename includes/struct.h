@@ -21,6 +21,7 @@ typedef struct game {
 typedef struct general {
     sfRenderWindow *window;
     sfClock *clock;
+    sfClock *clock2;
     sfEvent event;
 } general_t;
 
@@ -30,6 +31,7 @@ typedef struct rect_sprite {
     sfIntRect far_rect;
     sfIntRect skill_rect;
     sfIntRect road_rect;
+    sfIntRect player_rect;
 } rect_t;
 
 typedef struct sprite_game
@@ -40,8 +42,9 @@ typedef struct sprite_game
     sfSprite *far_building_bg;
     sfSprite *skill_building_bg;
     sfSprite *road;
+    sfSprite *player;
 
 } sprite_t;
 
-void event_manager_menu(sfRenderWindow *window, sfEvent event);
+void event_manager_menu(struct game *game);
 #endif //STRUCT_H

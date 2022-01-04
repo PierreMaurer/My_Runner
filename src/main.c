@@ -32,9 +32,15 @@ struct rect_sprite *rect_init(void)
     rect_game->road_rect.left = 0;
     rect_game->road_rect.width = 1920;
     rect_game->road_rect.top = 0;
+    rect_game->player_rect.top = 0;
+    //60
+    rect_game->player_rect.left = 60;
+    rect_game->player_rect.height = 150;
+    rect_game->player_rect.width = 100;
+
+
     return rect_game;
 }
-
 struct sprite_game *sprite_init()
 {
     sprite_t *sprite_game = malloc(sizeof(sprite_t));
@@ -68,6 +74,11 @@ struct sprite_game *sprite_init()
     sfTexture_setRepeated(texture_5, sfTrue);
     sfSprite_setTextureRect(sprite_game->road, sprite_game->rect_game->road_rect);
     sfSprite_setTexture(sprite_game->road, texture_5, sfTrue);
+
+    sprite_game->player = sfSprite_create();
+    sfTexture *texture_player = sfTexture_createFromFile("ressources/Run.png", NULL);
+    sfSprite_setTexture(sprite_game->player, texture_player, sfTrue);
+    sfSprite_setTextureRect(sprite_game->player, sprite_game->rect_game->player_rect);
     return sprite_game;
 };
 
@@ -79,6 +90,7 @@ void display_sprite(game_t game)
     sfRenderWindow_drawSprite(game.general->window, game.game_sprite->far_building_bg, NULL);
     sfRenderWindow_drawSprite(game.general->window, game.game_sprite->skill_building_bg, NULL);
     sfRenderWindow_drawSprite(game.general->window, game.game_sprite->road, NULL);
+    sfRenderWindow_drawSprite(game.general->window, game.game_sprite->player, NULL);
     sfRenderWindow_display(game.general->window);
 }
 struct general *init_general(void)
@@ -88,6 +100,7 @@ struct general *init_general(void)
     general->window = sfRenderWindow_create(mode_video, "MyRunner"
             , sfDefaultStyle, NULL);
     general->clock = sfClock_create();
+    general->clock2 = sfClock_create();
     return general;
 
 }
@@ -109,6 +122,8 @@ void position_set (game_t *game)
     sfSprite_setTextureRect(game->game_sprite->far_building_bg, game->game_sprite->rect_game->far_rect);
     sfSprite_setTextureRect(game->game_sprite->skill_building_bg, game->game_sprite->rect_game->skill_rect);
     sfSprite_setTextureRect(game->game_sprite->road, game->game_sprite->rect_game->road_rect);
+    sfSprite_setTextureRect(game->game_sprite->player, game->game_sprite->rect_game->player_rect);
+
 }
 
 void move_parallax(game_t *game)
@@ -125,11 +140,18 @@ int main(void)
     struct game *game = init_game();
     while (sfRenderWindow_isOpen(game->general->window)) {
         while (sfRenderWindow_pollEvent(game->general->window, &game->general->event))
-            event_manager_menu(game->general->window, game->general->event);
+            event_manager_menu(game);
+
         if (sfTime_asSeconds(sfClock_getElapsedTime(game->general->clock)) > 0.03) {
             move_parallax(game);
             position_set(game);
             sfClock_restart(game->general->clock);
+        }
+        if (sfTime_asSeconds(sfClock_getElapsedTime(game->general->clock2)) > 0.1) {
+            game->game_sprite->rect_game->player_rect.left += 150;
+            if (game->game_sprite->rect_game->player_rect.left >= 1160)
+                game->game_sprite->rect_game->player_rect.left = 60;
+            sfClock_restart(game->general->clock2);
         }
         display_sprite(*game);
     }
