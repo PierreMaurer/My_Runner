@@ -43,6 +43,7 @@ struct sprite_game *sprite_init()
 {
     sprite_t *sprite_game = malloc(sizeof(sprite_t));
     sprite_game->rect_game = rect_init();
+    sprite_game->posSprite = init_pos();
     sprite_game->background = sfSprite_create();
     sfTexture *texture = sfTexture_createFromFile("ressources/sky.png", NULL);
     sfTexture_setRepeated(texture, sfTrue);
@@ -75,13 +76,14 @@ struct sprite_game *sprite_init()
 
     sprite_game->character = sfSprite_create();
     sfVector2f scale_character;
-    scale_character.x = 3;
-    scale_character.y = 3;
+    scale_character.x = 7;
+    scale_character.y = 7;
     sfTexture *texture_char = sfTexture_createFromFile("ressources/Run.png", NULL);
     sfTexture_setRepeated(texture_char, sfTrue);
     sfSprite_setTexture(sprite_game->character, texture_char, sfTrue);
     sfSprite_setScale(sprite_game->character, scale_character);
     sfSprite_setTextureRect(sprite_game->character, sprite_game->rect_game->chara_rect);
+    sfSprite_setPosition(sprite_game->character, sprite_game->posSprite->character_position);
 
     return sprite_game;
 };
@@ -104,4 +106,13 @@ struct game *init_game()
     game->general = init_general();
     game->game_sprite = sprite_init();
     return game;
+}
+
+struct pos_sprite *init_pos()
+{
+    struct pos_sprite *posSprite = malloc(sizeof (struct pos_sprite));
+
+    posSprite->character_position.x = 200;
+    posSprite->character_position.y = 200;
+    return posSprite;
 }

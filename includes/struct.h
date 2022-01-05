@@ -33,9 +33,14 @@ typedef struct rect_sprite {
     sfIntRect chara_rect;
 } rect_t;
 
+typedef struct pos_sprite {
+    sfVector2f character_position;
+}posi_t;
+
 typedef struct sprite_game
 {
     struct rect_sprite *rect_game;
+    struct pos_sprite *posSprite;
     sfSprite *background;
     sfSprite *building_bg;
     sfSprite *far_building_bg;
@@ -49,6 +54,7 @@ void event_manager_menu(struct game *game);
 struct rect_sprite *rect_init(void);
 struct sprite_game *sprite_init();
 struct general *init_general(void);
+struct pos_sprite *init_pos();
 struct game *init_game();
 void position_set (game_t *game);
 void move_parallax(game_t *game);
