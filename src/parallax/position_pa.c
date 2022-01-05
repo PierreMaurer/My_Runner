@@ -19,10 +19,10 @@ void position_set (game_t *game)
 
 void move_parallax(game_t *game)
 {
-    game->game_sprite->rect_game->bg_rect.left += 4;
-    game->game_sprite->rect_game->building_rect.left += 8;
-    game->game_sprite->rect_game->far_rect.left += 12;
-    game->game_sprite->rect_game->skill_rect.left += 16;
-    game->game_sprite->rect_game->road_rect.left += 20;
+    game->game_sprite->rect_game->bg_rect.left += 8;
+    game->game_sprite->rect_game->building_rect.left += 16;
+    game->game_sprite->rect_game->far_rect.left += 24;
+    game->game_sprite->rect_game->skill_rect.left += 32;
+    game->game_sprite->rect_game->road_rect.left += 40;
     game->game_sprite->rect_game->chara_rect.left += 150;
 }
