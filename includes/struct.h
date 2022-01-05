@@ -30,6 +30,7 @@ typedef struct rect_sprite {
     sfIntRect far_rect;
     sfIntRect skill_rect;
     sfIntRect road_rect;
+    sfIntRect chara_rect;
 } rect_t;
 
 typedef struct sprite_game

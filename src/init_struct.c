@@ -32,6 +32,10 @@ struct rect_sprite *rect_init(void)
     rect_game->road_rect.width = 1920;
     rect_game->road_rect.top = 0;
 
+    rect_game->chara_rect.top = 0;
+    rect_game->chara_rect.height = 150;
+    rect_game->chara_rect.width = 100;
+    rect_game->chara_rect.left = 60;
     return rect_game;
 }
 
@@ -74,8 +78,10 @@ struct sprite_game *sprite_init()
     scale_character.x = 3;
     scale_character.y = 3;
     sfTexture *texture_char = sfTexture_createFromFile("ressources/Run.png", NULL);
+    sfTexture_setRepeated(texture_char, sfTrue);
     sfSprite_setTexture(sprite_game->character, texture_char, sfTrue);
     sfSprite_setScale(sprite_game->character, scale_character);
+    sfSprite_setTextureRect(sprite_game->character, sprite_game->rect_game->chara_rect);
 
     return sprite_game;
 };
