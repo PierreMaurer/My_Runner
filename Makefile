@@ -6,7 +6,10 @@
 ##
 
 SRC =	./src/main.c        \
-		./src/event_manager.c
+		./src/event_manager.c        \
+		./src/init_struct.c        \
+		./src/sprite/display_sprite.c        \
+		./src/parallax/position_pa.c
 
 OBJ =    $(SRC:.c=.o)
 

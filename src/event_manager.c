@@ -17,7 +17,7 @@ void event_manager_menu(struct game *game)
         sfSprite_destroy(game->game_sprite->far_building_bg);
         sfSprite_destroy(game->game_sprite->skill_building_bg);
         sfSprite_destroy(game->game_sprite->road);
-        sfSprite_destroy(game->game_sprite->player);
+        //sfSprite_destroy(game->game_sprite->player);
         sfRenderWindow_close(game->general->window);
     }
 }
