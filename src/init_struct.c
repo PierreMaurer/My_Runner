@@ -69,6 +69,14 @@ struct sprite_game *sprite_init()
     sfSprite_setTextureRect(sprite_game->road, sprite_game->rect_game->road_rect);
     sfSprite_setTexture(sprite_game->road, texture_5, sfTrue);
 
+    sprite_game->character = sfSprite_create();
+    sfVector2f scale_character;
+    scale_character.x = 3;
+    scale_character.y = 3;
+    sfTexture *texture_char = sfTexture_createFromFile("ressources/Run.png", NULL);
+    sfSprite_setTexture(sprite_game->character, texture_char, sfTrue);
+    sfSprite_setScale(sprite_game->character, scale_character);
+
     return sprite_game;
 };
 

@@ -40,6 +40,7 @@ typedef struct sprite_game
     sfSprite *far_building_bg;
     sfSprite *skill_building_bg;
     sfSprite *road;
+    sfSprite *character;
 
 } sprite_t;
 
