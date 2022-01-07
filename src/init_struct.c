@@ -86,7 +86,7 @@ struct sprite_game *sprite_init()
     sfSprite_setPosition(sprite_game->character, sprite_game->posSprite->character_position);
 
     return sprite_game;
-};
+}
 
 struct general *init_general(void)
 {
@@ -95,6 +95,7 @@ struct general *init_general(void)
     general->window = sfRenderWindow_create(mode_video, "MyRunner"
             , sfDefaultStyle, NULL);
     general->clock = sfClock_create();
+    general->player_c = sfClock_create();
     return general;
 }
 
