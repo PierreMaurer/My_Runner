@@ -20,6 +20,7 @@ typedef struct game {
 
 typedef struct general {
     sfRenderWindow *window;
+    sfClock *player_c;
     sfClock *clock;
     sfEvent event;
 } general_t;
@@ -35,6 +36,7 @@ typedef struct rect_sprite {
 
 typedef struct pos_sprite {
     sfVector2f character_position;
+    float grav;
 }posi_t;
 
 typedef struct sprite_game
@@ -50,13 +52,16 @@ typedef struct sprite_game
 
 } sprite_t;
 
-void event_manager_menu(struct game *game);
+void event_manager_menu(struct game *game, sfEvent event);
 struct rect_sprite *rect_init(void);
 struct sprite_game *sprite_init();
 struct general *init_general(void);
 struct pos_sprite *init_pos();
 struct game *init_game();
+void update_position_player(game_t *game);
 void position_set (game_t *game);
 void move_parallax(game_t *game);
 void display_sprite(game_t game);
+void check_clock(game_t *game);
+void jump(game_t *game);
 #endif //STRUCT_H

@@ -115,5 +115,6 @@ struct pos_sprite *init_pos()
 
     posSprite->character_position.x = 200;
     posSprite->character_position.y = 200;
+    posSprite->grav = 0;
     return posSprite;
 }

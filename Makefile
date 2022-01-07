@@ -9,12 +9,15 @@ SRC =	./src/main.c        \
 		./src/event_manager.c        \
 		./src/init_struct.c        \
 		./src/sprite/display_sprite.c        \
+		./src/parallax/position_character.c        \
+		./src/action/jump.c        \
+		./src/clock.c        \
 		./src/parallax/position_pa.c
 
 OBJ =    $(SRC:.c=.o)
 
 LIB = -lcsfml-graphics -lcsfml-window -lcsfml-system
-INCLUDE = -I ../include/ -L ./lib/ -lmy -g
+INCLUDE = -I ../include/ -L ./lib/ -lmy -g -Wall -Wextra -Wpedantic
 
 NAME =	my_runner
 
