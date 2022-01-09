@@ -101,6 +101,25 @@ struct sprite_game *sprite_init()
     sfSprite_setTextureRect(sprite_game->obstacle, sprite_game->rect_game->obstacle_rect);
     sfSprite_setPosition(sprite_game->obstacle, sprite_game->posSprite->obstacle_pos);
 
+    sprite_game->score_text = sfText_create();
+    sfVector2f score_tex_pos;
+    sfFont *score_font = sfFont_createFromFile("ressources/font.otf");
+    score_tex_pos.x = 1150;
+    score_tex_pos.y = 0;
+    sfText_setString(sprite_game->score_text, "score:");
+    sfText_setCharacterSize(sprite_game->score_text, 70);
+    sfText_setPosition(sprite_game->score_text, score_tex_pos);
+    sfText_setFont(sprite_game->score_text, score_font);
+
+    sprite_game->score = sfText_create();
+    sfVector2f score_p;
+    sfFont *font_score_p = sfFont_createFromFile("ressources/font.ttf");
+    score_p.x = 1400;
+    score_p.y = 0;
+    sfText_setCharacterSize(sprite_game->score, 70);
+    sfText_setPosition(sprite_game->score, score_p);
+    sfText_setFont(sprite_game->score, font_score_p);
+
     return sprite_game;
 }
 
@@ -131,19 +150,11 @@ struct pos_sprite *init_pos()
 {
     struct pos_sprite *posSprite = malloc(sizeof (struct pos_sprite));
 
-    posSprite->character_position.x = 200; //200
-    posSprite->character_position.y = 200; // 200
+    posSprite->character_position.x = 200;
+    posSprite->character_position.y = 200;
     posSprite->grav = 0;
-
-    posSprite->obstacle_pos.x =  -300; // -300
-    posSprite->obstacle_pos.y = 480; //480
+    posSprite->obstacle_pos.x =  -300;
+    posSprite->obstacle_pos.y = 480;
     posSprite->grav = 0;
     return posSprite;
-
-    // hauteur: 95
-    //largeur début: 470
-    //largeur fin : 700
-
-    //170
-    //220
 }

@@ -64,6 +64,8 @@ typedef struct sprite_game
     sfSprite *road;
     sfSprite *character;
     sfSprite *obstacle;
+    sfText *score_text;
+    sfText *score;
 
 } sprite_t;
 
