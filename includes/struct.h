@@ -35,7 +35,6 @@ typedef struct general {
     sfClock *clock;
     int life;
     int score;
-    sfMusic *music;
 } general_t;
 
 typedef struct rect_sprite {
@@ -96,9 +95,12 @@ struct sprite_game *sprite_init_third(struct sprite_game *sprite_game);
 struct sprite_game *sprite_init_four(struct sprite_game *sprite_game);
 struct sprite_game *sprite_init_fift(struct sprite_game sprite);
 struct sprite_game *sprite_rect_init(struct sprite_game *sprite_game);
+struct end_menu *end_menu_init_sec(struct end_menu *menu_end);
+struct end_menu *end_menu_init_third(struct end_menu *menu_end);
 int gameloop(void);
 void help_print(void);
 void start_error(void);
 int check_exist_map(char *pwd_map);
 int fs_understand_return_of_read(int fd , int *buffer , int size);
+void destroy_sprite(game_t game);
 #endif //STRUCT_H
