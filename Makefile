@@ -6,6 +6,8 @@
 ##
 
 SRC =	./src/main.c        \
+		./src/init_rect.c        \
+		./src/init_sprite.c        \
 		./src/event_manager.c        \
 		./src/init_struct.c        \
 		./src/sprite/display_sprite.c        \
