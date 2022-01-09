@@ -9,10 +9,13 @@ SRC =	./src/main.c        \
 		./src/event_manager.c        \
 		./src/init_struct.c        \
 		./src/sprite/display_sprite.c        \
+		./src/file/check_file.c        \
 		./src/parallax/position_character.c        \
 		./src/action/jump.c        \
 		./src/action/check_collision.c        \
 		./src/clock.c        \
+		./src/gameloop/game_loop.c        \
+		./src/gameloop/display_print/help.c        \
 		./src/end_menu/sprite/display.c        \
 		./src/end_menu/sprite/parallax.c        \
 		./src/end_menu/general_endmenu.c        \
@@ -23,7 +26,7 @@ SRC =	./src/main.c        \
 
 OBJ =    $(SRC:.c=.o)
 
-LIB = -lcsfml-graphics -lcsfml-window -lcsfml-system
+LIB = -lcsfml-graphics -lcsfml-window -lcsfml-system -lcsfml-audio
 INCLUDE = -I ../include/ -L ./lib/ -lmy -g -Wall -Wextra -Wpedantic
 
 NAME =	my_runner

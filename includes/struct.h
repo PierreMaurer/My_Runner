@@ -12,6 +12,7 @@
 #include <SFML/Audio.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <fcntl.h>
 #include "my.h"
 
 typedef struct game {
@@ -35,6 +36,7 @@ typedef struct general {
     sfClock *clock;
     int life;
     int score;
+    sfMusic *music;
 } general_t;
 
 typedef struct rect_sprite {
@@ -90,4 +92,8 @@ void check_clock_end(game_t *game);
 void end_menu(game_t *game);
 void event_manager_menu_endmenu(struct game *game, sfEvent event);
 struct end_menu *init_end_menu(game_t game);
+int gameloop(void);
+void help_print(void);
+void start_error(void);
+int check_exist_map(char *pwd_map);
 #endif //STRUCT_H
