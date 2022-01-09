@@ -18,4 +18,3 @@ void event_manager(struct game *game, sfEvent event)
             game->game_sprite->posSprite->grav = 1;
     }
 }
-

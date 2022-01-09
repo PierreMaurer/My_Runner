@@ -6,15 +6,14 @@
 */
 
 #ifndef STRUCT_H
-#define STRUCT_H
+    #define STRUCT_H
 
-#include <SFML/Graphics.h>
-#include <SFML/Audio.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include "my.h"
-
+    #include <SFML/Graphics.h>
+    #include <SFML/Audio.h>
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <fcntl.h>
+    #include "my.h"
 typedef struct game {
     struct sprite_game *game_sprite;
     struct end_menu *menu_end;
@@ -73,10 +72,10 @@ typedef struct sprite_game
 
 void event_manager(struct game *game, sfEvent event);
 struct rect_sprite *rect_init(void);
-struct sprite_game *sprite_init();
+struct sprite_game *sprite_init(void);
 struct general *init_general(void);
-struct pos_sprite *init_pos();
-struct game *init_game();
+struct pos_sprite *init_pos(void);
+struct game *init_game(void);
 void update_position_player(game_t *game);
 void position_set (game_t *game);
 void move_parallax(game_t *game);
@@ -84,7 +83,6 @@ void display_sprite(game_t game);
 void check_clock(game_t *game);
 void jump(game_t *game);
 void check_collision(game_t *game);
-
 void display_sprite_endmenu(game_t game);
 void position_set_end(game_t *game);
 void move_parallax_end(game_t *game);
@@ -92,8 +90,14 @@ void check_clock_end(game_t *game);
 void end_menu(game_t *game);
 void event_manager_menu_endmenu(struct game *game, sfEvent event);
 struct end_menu *init_end_menu(game_t game);
+struct rect_sprite *rect_init_second(void);
+struct sprite_game *sprite_init_second(struct sprite_game sprite);
+struct sprite_game *sprite_init_third(struct sprite_game sprite);
+struct sprite_game *sprite_init_four(struct sprite_game sprite);
+struct sprite_game *sprite_init_fift(struct sprite_game sprite);
 int gameloop(void);
 void help_print(void);
 void start_error(void);
 int check_exist_map(char *pwd_map);
+int fs_understand_return_of_read(int fd , int *buffer , int size);
 #endif //STRUCT_H

@@ -29,14 +29,14 @@ struct rect_sprite *rect_init(void)
     rect_game->skill_rect.top = 0;
     rect_game->road_rect.height = 1080;
     rect_game->road_rect.left = 0;
+
+
     rect_game->road_rect.width = 1920;
     rect_game->road_rect.top = 0;
-
     rect_game->chara_rect.top = 0;
     rect_game->chara_rect.height = 150;
     rect_game->chara_rect.width = 100;
     rect_game->chara_rect.left = 60;
-
     rect_game->obstacle_rect.top = 0;
     rect_game->obstacle_rect.height = 880;
     rect_game->obstacle_rect.width = 900;
@@ -44,7 +44,7 @@ struct rect_sprite *rect_init(void)
     return rect_game;
 }
 
-struct sprite_game *sprite_init()
+struct sprite_game *sprite_init(void)
 {
     sprite_t *sprite_game = malloc(sizeof(sprite_t));
     sprite_game->rect_game = rect_init();
@@ -127,7 +127,7 @@ struct general *init_general(void)
 {
     struct general *general = malloc(sizeof(general));
     sfVideoMode mode_video = {1920, 1080, 32};
-    general->window = sfRenderWindow_create(mode_video, "MyRunner"
+    general->window = sfRenderWindow_create(mode_video, "HydrantRunner"
             , sfDefaultStyle, NULL);
     general->clock = sfClock_create();
     general->player_c = sfClock_create();
@@ -135,18 +135,16 @@ struct general *init_general(void)
     return general;
 }
 
-struct game *init_game()
+struct game *init_game(void)
 {
     struct game *game = malloc(sizeof(struct game));
-    if (game == NULL)
-        printf("Pas ouf");
     game->general = init_general();
     game->game_sprite = sprite_init();
     game->menu_end = init_end_menu(*game);
     return game;
 }
 
-struct pos_sprite *init_pos()
+struct pos_sprite *init_pos(void)
 {
     struct pos_sprite *posSprite = malloc(sizeof (struct pos_sprite));
 
