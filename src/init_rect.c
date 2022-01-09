@@ -7,7 +7,6 @@
 
 #include "../includes/struct.h"
 
-//TODO Opti rect_init
 struct rect_sprite *rect_init(void)
 {
     struct rect_sprite *rect_game = malloc(sizeof(rect_t));
