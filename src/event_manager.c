@@ -7,7 +7,7 @@
 
 #include "../includes/struct.h"
 
-void event_manager_menu(struct game *game, sfEvent event)
+void event_manager(struct game *game, sfEvent event)
 {
     if (event.type == sfEvtClosed) {
         sfRenderWindow_close(game->general->window);

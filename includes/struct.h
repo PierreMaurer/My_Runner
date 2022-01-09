@@ -12,17 +12,29 @@
 #include <SFML/Audio.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "my.h"
 
 typedef struct game {
     struct sprite_game *game_sprite;
+    struct end_menu *menu_end;
     struct general *general;
 } game_t;
+
+typedef struct end_menu {
+    sfText *title;
+    sfText *score;
+    sfText *text_score;
+    sfText *restart;
+    sfText *lose;
+    sfFont *text_font;
+} end_t;
 
 typedef struct general {
     sfRenderWindow *window;
     sfClock *player_c;
     sfClock *clock;
-    sfEvent event;
+    int life;
+    int score;
 } general_t;
 
 typedef struct rect_sprite {
@@ -32,10 +44,12 @@ typedef struct rect_sprite {
     sfIntRect skill_rect;
     sfIntRect road_rect;
     sfIntRect chara_rect;
+    sfIntRect obstacle_rect;
 } rect_t;
 
 typedef struct pos_sprite {
     sfVector2f character_position;
+    sfVector2f obstacle_pos;
     float grav;
 }posi_t;
 
@@ -49,10 +63,11 @@ typedef struct sprite_game
     sfSprite *skill_building_bg;
     sfSprite *road;
     sfSprite *character;
+    sfSprite *obstacle;
 
 } sprite_t;
 
-void event_manager_menu(struct game *game, sfEvent event);
+void event_manager(struct game *game, sfEvent event);
 struct rect_sprite *rect_init(void);
 struct sprite_game *sprite_init();
 struct general *init_general(void);
@@ -64,4 +79,13 @@ void move_parallax(game_t *game);
 void display_sprite(game_t game);
 void check_clock(game_t *game);
 void jump(game_t *game);
+void check_collision(game_t *game);
+
+void display_sprite_endmenu(game_t game);
+void position_set_end(game_t *game);
+void move_parallax_end(game_t *game);
+void check_clock_end(game_t *game);
+void end_menu(game_t *game);
+void event_manager_menu_endmenu(struct game *game, sfEvent event);
+struct end_menu *init_end_menu(game_t game);
 #endif //STRUCT_H

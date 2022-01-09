@@ -11,7 +11,14 @@ SRC =	./src/main.c        \
 		./src/sprite/display_sprite.c        \
 		./src/parallax/position_character.c        \
 		./src/action/jump.c        \
+		./src/action/check_collision.c        \
 		./src/clock.c        \
+		./src/end_menu/sprite/display.c        \
+		./src/end_menu/sprite/parallax.c        \
+		./src/end_menu/general_endmenu.c        \
+		./src/end_menu/event/event_manager.c        \
+		./src/end_menu/init/init_struct.c        \
+		./src/end_menu/clock_end.c        \
 		./src/parallax/position_pa.c
 
 OBJ =    $(SRC:.c=.o)
