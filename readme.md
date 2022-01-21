@@ -11,4 +11,6 @@ To try this project follow the following steps
 1. Compile project:
    >  `make`
 1. Execute the my_hunter file
-   > `./my_runner`
+   > `./my_runner -i`
+
+Press space to Jump.
